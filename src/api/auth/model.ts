@@ -1,9 +1,9 @@
-import { z } from "zod";
+import { z } from 'zod'
 
-import { AuthCredentialsSchema, AuthResponseDataSchema } from "./config";
+import { AuthCredentialsSchema, AuthResponseDataSchema } from './config'
 
-type AuthCredentials = z.infer<typeof AuthCredentialsSchema>;
+type AuthCredentials = z.infer<typeof AuthCredentialsSchema>
 
-type AuthResponseData = z.infer<typeof AuthResponseDataSchema>;
+type AuthResponseData = z.infer<typeof AuthResponseDataSchema>
 
-export type { AuthCredentials, AuthResponseData };
+export type { AuthCredentials, AuthResponseData }

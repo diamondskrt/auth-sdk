@@ -1,2 +1,2 @@
-export { UserSchema } from "./config";
-export type { User } from "./model";
+export { UserSchema } from './config'
+export type { User } from './model'

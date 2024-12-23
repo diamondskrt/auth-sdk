@@ -1,90 +1,94 @@
-import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import Cookies from 'js-cookie'
+import { useEffect, useState } from 'react'
 
-import { authApi, Profile, profileApi, type AuthCredentials } from "~/api";
-import { dayjs } from "~/lib";
+import { authApi, Profile, profileApi, type AuthCredentials } from '~/api'
+import { dayjs } from '~/lib'
 
-import { AuthProviderContext } from "../config";
+import { AuthProviderContext } from '../config'
 import {
   AccessTokenParams,
   AuthProviderProps,
   RefreshTokenParams,
-} from "../model";
+} from '../model'
 
-export function AuthProvider({ children }: AuthProviderProps) {
+export function AuthProvider({ children, client }: AuthProviderProps) {
+  const { signIn } = authApi(client)
+  const { getProfile } = profileApi(client)
+
   const [isAuthenticated, setIsAuthenticated] = useState(
-    Boolean(Cookies.get("auth-app/accessToken")),
-  );
+    Boolean(Cookies.get('auth-app/accessToken'))
+  )
 
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [isPending, setIsPending] = useState(false);
+  const [profile, setProfile] = useState<Profile | null>(null)
+  const [isPending, setIsPending] = useState(false)
 
   const fetchProfile = async () => {
     try {
-      setIsPending(true);
-      const data = (await profileApi.getProfile())?.data;
-      setProfile(data);
+      setIsPending(true)
+      const data = (await getProfile())?.data
+      setProfile(data)
     } catch (error) {
-      console.error(error);
-      throw error;
+      console.error(error)
+      throw error
     } finally {
-      setIsPending(false);
+      setIsPending(false)
     }
-  };
+  }
 
   const setAccessToken = ({ accessToken, expires }: AccessTokenParams) => {
-    Cookies.set("auth-app/accessToken", accessToken, { expires });
-  };
+    Cookies.set('auth-app/accessToken', accessToken, { expires })
+  }
 
   const removeAccessToken = () => {
-    Cookies.remove("auth-app/accessToken");
-  };
+    Cookies.remove('auth-app/accessToken')
+  }
 
   const setRefreshToken = ({ refreshToken, expires }: RefreshTokenParams) => {
-    Cookies.set("auth-app/refreshToken", refreshToken, { expires });
-  };
+    Cookies.set('auth-app/refreshToken', refreshToken, { expires })
+  }
 
   const removeRefreshToken = () => {
-    Cookies.remove("auth-app/refreshToken");
-  };
+    Cookies.remove('auth-app/refreshToken')
+  }
 
   const removeTokens = () => {
-    removeAccessToken();
-    removeRefreshToken();
-  };
+    removeAccessToken()
+    removeRefreshToken()
+  }
 
   const login = async (values: AuthCredentials) => {
     try {
-      setIsPending(true);
-      const data = (await authApi.login(values))?.data;
+      setIsPending(true)
+      const data = (await signIn(values))?.data
 
       setAccessToken({
         accessToken: data.accessToken,
         expires: dayjs(data.accessTokenExpiresAt).toDate(),
-      });
+      })
 
       setRefreshToken({
         refreshToken: data.refreshToken,
         expires: dayjs(data.refreshTokenExpiresAt).toDate(),
-      });
+      })
 
-      setIsAuthenticated(true);
+      setIsAuthenticated(true)
     } catch (error) {
-      console.error(error);
-      throw error;
+      console.error(error)
+      throw error
     } finally {
-      setIsPending(false);
+      setIsPending(false)
     }
-  };
+  }
 
   const logout = () => {
-    removeTokens();
-    setIsAuthenticated(false);
-  };
+    removeTokens()
+    setIsAuthenticated(false)
+  }
 
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    fetchProfile()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <AuthProviderContext.Provider
@@ -98,5 +102,5 @@ export function AuthProvider({ children }: AuthProviderProps) {
     >
       {children}
     </AuthProviderContext.Provider>
-  );
+  )
 }

@@ -1,2 +1,2 @@
-export { AbilityGroupSchema, Role } from "./config";
-export type { AbilityGroup } from "./model";
+export { AbilityGroupSchema, Role } from './config'
+export type { AbilityGroup } from './model'

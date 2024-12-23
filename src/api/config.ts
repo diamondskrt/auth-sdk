@@ -1,9 +1,9 @@
-import { z } from "zod";
+import { z } from 'zod'
 
-const UUIDSchema = z.string().uuid().optional();
+const UUIDSchema = z.string().uuid().optional()
 
 const BaseEntity = z.object({
   id: UUIDSchema,
-});
+})
 
-export { BaseEntity, UUIDSchema };
+export { BaseEntity, UUIDSchema }

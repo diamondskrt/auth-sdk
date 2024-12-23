@@ -3,4 +3,4 @@ export type {
   RefreshTokenParams,
   AuthProviderContextType,
   AuthProviderProps,
-} from "./types";
+} from './types'
