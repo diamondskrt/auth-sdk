@@ -1,15 +1,11 @@
-import { Api } from "~/api";
+import { ClientApi } from '~/api'
 
-import { Profile } from "./model";
+import { Profile } from './model'
 
-const profileUrl = "/v1/profile";
+const profileUrl = '/v1/profile'
 
-class ProfileApi extends Api {
-  getProfile() {
-    return this.get<Profile>({ endpoint: profileUrl });
-  }
-}
+const profileApi = (client: ClientApi) => ({
+  getProfile: () => client.get<Profile>({ endpoint: profileUrl }),
+})
 
-const profileApi = new ProfileApi();
-
-export { profileApi };
+export { profileApi }

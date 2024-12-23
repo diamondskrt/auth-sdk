@@ -1,9 +1,9 @@
-import { createContext } from "react";
+import { createContext } from 'react'
 
-import { AuthProviderContextType } from "../model";
+import { AuthProviderContextType } from '../model'
 
 const AuthProviderContext = createContext<AuthProviderContextType | undefined>(
-  undefined,
-);
+  undefined
+)
 
-export { AuthProviderContext };
+export { AuthProviderContext }

@@ -1,6 +1,6 @@
-import { z } from "zod";
+import { z } from 'zod'
 
-import { AbilityGroupSchema, BaseEntity } from "~/api";
+import { AbilityGroupSchema, BaseEntity } from '~/api'
 
 const UserSchema = BaseEntity.merge(
   z.object({
@@ -14,7 +14,7 @@ const UserSchema = BaseEntity.merge(
     merchantCode: z.string().min(1),
     blockedAt: z.string(),
     blockedTo: z.string().optional(),
-  }),
-);
+  })
+)
 
-export { UserSchema };
+export { UserSchema }

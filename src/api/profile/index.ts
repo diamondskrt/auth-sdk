@@ -1,2 +1,2 @@
-export { profileApi } from "./profile";
-export type { Profile } from "./model";
+export { profileApi } from './profile'
+export type { Profile } from './model'

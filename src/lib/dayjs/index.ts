@@ -1,1 +1,1 @@
-export { dayjs } from "./dayjs";
+export { dayjs } from './dayjs'

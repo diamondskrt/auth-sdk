@@ -1,2 +1,2 @@
-export { AuthProvider } from "./ui";
-export { useAuth } from "./lib";
+export { AuthProvider } from './ui'
+export { useAuth } from './lib'

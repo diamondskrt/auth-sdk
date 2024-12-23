@@ -1,15 +1,13 @@
-import { Api } from "~/api";
+import { ClientApi } from '~/api'
 
-import { AuthCredentials, AuthResponseData } from "./model";
+import { AuthCredentials, AuthResponseData } from './model'
 
-const authUrl = "/auth";
+const authUrl = '/auth'
 
-class AuthApi extends Api {
-  login(credentials: AuthCredentials) {
-    return this.post<AuthResponseData>(`${authUrl}/token`, credentials);
-  }
-}
+const authApi = (client: ClientApi) => ({
+  signIn: (credentials: AuthCredentials) => {
+    return client.post<AuthResponseData>(`${authUrl}/token`, credentials)
+  },
+})
 
-const authApi = new AuthApi();
-
-export { authApi };
+export { authApi }
