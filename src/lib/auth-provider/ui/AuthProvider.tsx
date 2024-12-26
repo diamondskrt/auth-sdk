@@ -1,8 +1,7 @@
-import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 
 import { authApi, Profile, profileApi, type AuthCredentials } from '~/api'
-import { dayjs } from '~/lib'
+import { dayjs, storage } from '~/lib'
 
 import { AuthProviderContext } from '../config'
 import {
@@ -12,11 +11,17 @@ import {
 } from '../model'
 
 export function AuthProvider({ children, client }: AuthProviderProps) {
-  const { signIn } = authApi(client)
+  const { signIn, updateToken } = authApi(client)
   const { getProfile } = profileApi(client)
+  const { setItem, getItem, removeItem } = storage
 
   const [isAuthenticated, setIsAuthenticated] = useState(
-    Boolean(Cookies.get('auth-app/accessToken'))
+    Boolean(
+      getItem({
+        key: `${client.authKey}/accessToken`,
+        useLocalStorage: client.useLocalStorage,
+      })
+    )
   )
 
   const [profile, setProfile] = useState<Profile | null>(null)
@@ -36,19 +41,23 @@ export function AuthProvider({ children, client }: AuthProviderProps) {
   }
 
   const setAccessToken = ({ accessToken, expires }: AccessTokenParams) => {
-    Cookies.set('auth-app/accessToken', accessToken, { expires })
+    const key = `${client.authKey}/accessToken`
+    setItem({ key, value: accessToken, expires })
   }
 
   const removeAccessToken = () => {
-    Cookies.remove('auth-app/accessToken')
+    const key = `${client.authKey}/accessToken`
+    removeItem({ key, useLocalStorage: client.useLocalStorage })
   }
 
   const setRefreshToken = ({ refreshToken, expires }: RefreshTokenParams) => {
-    Cookies.set('auth-app/refreshToken', refreshToken, { expires })
+    const key = `${client.authKey}/refreshToken`
+    setItem({ key, value: refreshToken, expires })
   }
 
   const removeRefreshToken = () => {
-    Cookies.remove('auth-app/refreshToken')
+    const key = `${client.authKey}/refreshToken`
+    removeItem({ key, useLocalStorage: client.useLocalStorage })
   }
 
   const removeTokens = () => {
@@ -98,6 +107,7 @@ export function AuthProvider({ children, client }: AuthProviderProps) {
         profile,
         login,
         logout,
+        updateToken,
       }}
     >
       {children}

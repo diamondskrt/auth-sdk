@@ -5,14 +5,16 @@ import { ApiOptions, HeadersInit, Meta } from './model'
 
 class ClientApi {
   private baseUrl: string | null = null
-  private authKey: string | null = null
+  authKey: string | null = null
+  useLocalStorage: boolean = false
   private headers: HeadersInit = {
     'Content-Type': 'application/json',
   }
 
-  constructor({ baseUrl, authKey }: ApiOptions) {
+  constructor({ baseUrl, authKey, useLocalStorage }: ApiOptions) {
     this.baseUrl = baseUrl
     this.authKey = authKey
+    this.useLocalStorage = useLocalStorage ?? false
   }
 
   private getAuthHeaders(): HeadersInit {
