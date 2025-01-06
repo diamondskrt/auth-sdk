@@ -1,6 +1,7 @@
 type ApiOptions = {
   baseUrl: string
   authKey: string
+  useLocalStorage?: boolean
 }
 
 type Page = {

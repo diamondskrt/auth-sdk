@@ -15,6 +15,7 @@ interface AuthProviderContextType {
   isPending: boolean
   login: (values: AuthCredentials) => void
   logout: () => void
+  updateToken: (minValidity: number) => void
   profile: Profile | null
 }
 
