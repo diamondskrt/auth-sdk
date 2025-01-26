@@ -48,6 +48,18 @@ export default tseslint.config(
       'import/order': [
         'error',
         {
+          pathGroups: [
+            {
+              pattern: '~/api/**',
+              group: 'internal',
+              position: 'before',
+            },
+            {
+              pattern: './**',
+              group: 'sibling',
+              position: 'after',
+            },
+          ],
           pathGroupsExcludedImportTypes: ['builtin'],
           groups: [
             'builtin',

@@ -1,4 +1,4 @@
-import { ClientApi } from '~/api'
+import { ClientApi } from '~/api/base'
 
 import { isTokenExpired } from './lib'
 import { AuthCredentials, AuthResponseData } from './model'

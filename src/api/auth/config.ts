@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { AbilityGroupSchema } from '~/api'
+import { AbilityGroupSchema } from '~/api/ability-group'
 
 const AuthCredentialsSchema = z.object({
   username: z.string().min(2),

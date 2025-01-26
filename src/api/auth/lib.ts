@@ -1,4 +1,4 @@
-import { storage } from '~/lib'
+import { storage } from '~/lib/storage'
 
 const isTokenExpired = (minValidity: number) => {
   const token = storage.getItem({ key: 'accessToken' })
