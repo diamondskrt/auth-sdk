@@ -1,4 +1,6 @@
-import { ClientApi, Profile, type AuthCredentials } from '~/api'
+import { AuthCredentials } from '~/api/auth'
+import { ClientApi } from '~/api/base'
+import { Profile } from '~/api/profile'
 
 type AccessTokenParams = {
   accessToken: string

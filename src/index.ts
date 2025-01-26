@@ -1,2 +1,2 @@
-export { AuthProvider, useAuth } from './lib'
-export { createAuthClient } from './api'
+export { AuthProvider, useAuth } from './lib/auth-provider'
+export { createAuthClient } from './api/base'

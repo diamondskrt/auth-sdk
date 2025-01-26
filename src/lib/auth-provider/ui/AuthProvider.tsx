@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { authApi, Profile, profileApi, type AuthCredentials } from '~/api'
-import { dayjs, storage } from '~/lib'
+import { authApi, AuthCredentials } from '~/api/auth'
+import { Profile, profileApi } from '~/api/profile'
+
+import { dayjs } from '~/lib/dayjs'
+import { storage } from '~/lib/storage'
 
 import { AuthProviderContext } from '../config'
 import {

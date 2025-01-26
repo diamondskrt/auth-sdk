@@ -1,4 +1,4 @@
-import { ClientApi } from '~/api'
+import { ClientApi } from '~/api/base'
 
 import { Profile } from './model'
 

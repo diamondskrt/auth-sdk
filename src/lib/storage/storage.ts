@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 
-import { dayjs } from '~/lib'
+import { dayjs } from '~/lib/dayjs'
 
 import { StorageOptions, StorageBaseOptions } from './model'
 

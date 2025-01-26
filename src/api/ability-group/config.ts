@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { BaseEntity } from '~/api'
+import { BaseEntity } from '~/api/config'
 
 enum Role {
   Admin = 'admin',
